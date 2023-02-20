@@ -12,8 +12,8 @@ app.use(cors());
 // Implement a custom About page.
 app.get('/ping', (request, response) => {
 	console.log('Ping recieved')
-	response.type('application/json')
-	response.send({ data: "Pong!" })
+	response.type('text/plain')
+	response.send('Pong!')
 })
 
 app.post('/calculate_risk', bodyParser, (request, response) => {
