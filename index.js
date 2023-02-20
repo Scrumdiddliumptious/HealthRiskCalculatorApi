@@ -8,8 +8,6 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 
-// The app.get functions below are being processed in Node.js running on the server.
-// Implement a custom About page.
 app.get("/ping", (request, response) => {
   console.log("Ping recieved");
   response.type("text/plain");
@@ -24,6 +22,8 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
     request.body.bmi +
     request.body.bp +
     request.body.disease;
+
+  console.log(request.body);
   risk.score = totalScore;
 
   if (totalScore <= 20) {
