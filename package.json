@@ -9,6 +9,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "open": "^8.4.0"
   }

@@ -1,9 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser').json()
+const cors = require('cors')
 const open = require('open')
 app = express()
 
 const port = process.env.PORT || 3000
+
+app.use(cors());
 
 // The app.get functions below are being processed in Node.js running on the server.
 // Implement a custom About page.
