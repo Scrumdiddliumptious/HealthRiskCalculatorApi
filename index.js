@@ -9,8 +9,8 @@ const port = process.env.PORT || 3000
 // Implement a custom About page.
 app.get('/ping', (request, response) => {
 	console.log('Ping recieved')
-	response.type('text/plain')
-	response.send('Pong!')
+	response.type('application/json')
+	response.send({ data: "Pong!" })
 })
 
 app.post('/calculate_risk', bodyParser, (request, response) => {
