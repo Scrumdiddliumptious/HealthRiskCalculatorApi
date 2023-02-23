@@ -1,8 +1,16 @@
-# PROJECT_TITLE
+# HealthRiskCalculatorAPI
 
-Developed by Collin Koldoff
+Contributors:
 
-collinakoldoff@lewisu.edu
+Collin Koldoff (collinakoldoff@lewisu.edu)
+
+Justina Piwoni (justinajpiwoni@lewisu.edu)
+
+Katherine Groppe (katherinergroppe@lewisu.edu)
+
+Ryan Leiteritz (ryanpleiteritz@lewisu.edu)
+
+Nathan Lange (nathandlange@lewisu.edu)
 
 ---
 ## Requirements
@@ -11,10 +19,10 @@ For development, you will only need Node.js installed in your environement.
 
 ## Setup
 
-    $ git clone https://github.com/collink2451/PROJECT_TITLE
-    $ cd PROJECT_TITLE
+    $ git clone https://github.com/Scrumdiddliumptious/HealthRiskCalculatorApi.git
+    $ cd HealthRiskCalculatorApi
     $ npm i
 
 ## Running the project
 
-    npm start
+    npm run start
