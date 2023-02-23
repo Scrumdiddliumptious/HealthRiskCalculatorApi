@@ -10,7 +10,16 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.3",
+    "express": "^4.18.2",
     "open": "^8.4.0"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scrumdiddliumptious/HealthRiskCalculatorApi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Scrumdiddliumptious/HealthRiskCalculatorApi/issues"
+  },
+  "homepage": "https://github.com/Scrumdiddliumptious/HealthRiskCalculatorApi#readme"
 }
