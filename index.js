@@ -17,26 +17,40 @@ app.get("/ping", (request, response) => {
 app.post("/calculate_risk", bodyParser, (request, response) => {
   risk = {};
 
-  totalScore =
-    request.body.age +
-    request.body.bmi +
-    request.body.bp +
-    request.body.disease;
+  // totalScore =
+  //   request.body.age +
+  //   request.body.bmi +
+  //   request.body.bp +
+  //   request.body.disease;
 
-  console.log(request.body);
-  risk.score = totalScore;
+  // console.log(request.body);
+  // risk.score = totalScore;
 
-  if (totalScore <= 20) {
-    risk.risk = "Low Risk";
-  } else if (totalScore <= 50) {
-    risk.risk = "Moderate Risk";
-  } else if (totalScore <= 75) {
-    risk.risk = "High Risk";
-  } else {
-    risk.risk = "Uninsurable";
-  }
+  // if (totalScore <= 20) {
+  //   risk.risk = "Low Risk";
+  // } else if (totalScore <= 50) {
+  //   risk.risk = "Moderate Risk";
+  // } else if (totalScore <= 75) {
+  //   risk.risk = "High Risk";
+  // } else {
+  //   risk.risk = "Uninsurable";
+  // }
 
-  response.type("application/json");
+  const height = (request.body.height) * 0.0254
+  const weight = (request.body.weight) / 2.2
+  bmi = (weight)/Math.pow(height, 2);
+  
+  response.type("application/json")
+  response.send(bmi)
+
+  const systolic = (request.body.systolic) 
+  const diastolic = (request.body.diastolic)
+
+  bp = (request.body.systolic) + "/" + (request.body.diastolic)
+  response.type("application/json")
+  response.send(bp)
+
+  response.type("application/json")
   response.send(risk);
 });
 
