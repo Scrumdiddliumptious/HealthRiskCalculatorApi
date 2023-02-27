@@ -40,6 +40,21 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
   response.send(risk);
 });
 
+
+app.post("/calculate_disease", bodyParser, (request, response) => {
+  //Here is the disease calculator
+  risk = {};
+  const diabetis = request.body.diabetis
+  const cancer = request.body.cancer
+  const alzhe = request.body.alzhe
+
+  
+  
+
+  response.type("application/json");
+  response.send(risk);
+});
+
 // Custom 404 page.
 app.use((request, response) => {
   response.type("text/plain");
