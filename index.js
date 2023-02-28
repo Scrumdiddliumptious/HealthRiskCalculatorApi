@@ -66,6 +66,16 @@ app.post("/calculate_disease", bodyParser, (request, response) => {
   const cancer = request.body.cancer
   const alzhe = request.body.alzhe
 
+  if (alzhe = yes) {
+    risk.risk = "Low Risk";
+  } else if (totalScore <= 50) {
+    risk.risk = "Moderate Risk";
+  } else if (totalScore <= 75) {
+    risk.risk = "High Risk";
+  } else {
+    risk.risk = "Uninsurable";
+  }
+
   
   
 
