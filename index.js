@@ -41,12 +41,39 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
 });
 
 app.post("/calculate_bmi", bodyParser, (request, response) => {
+  
+  var points;
+
   height = request.body.height * 0.0254
   weight = request.body.weight / 2.2
   bmi = weight/Math.pow(height, 2);
   
+  //bmi = bmi.toFixed(1);
+  parseFloat(bmi.toFixed(1))
+
+  switch (bmi) {
+    case 18.5 >= bmi >= 24.9:
+      points = 0;
+      break;
+    case 25 >= bmi >= 29.9:
+      points = 30;
+      break;
+    case 30.0 >= bmi >= 34.9:
+      points = 75;
+      break;
+    case bmi < 18.5:
+      points = 75;
+      break;
+    case bmi > 35:
+      points = 75;
+      break; 
+  }
+
+
   response.type("application/json")
-  response.send(bmi)
+  response.send(points)
+
+
 })
 
 app.post("/calculate_bp", bodyParser, (request, response) => {
