@@ -36,32 +36,41 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
     risk.risk = "Uninsurable";
   }
 
-  response.type("application/json")
+  response.type("application/json");
   response.send(risk);
 });
 
 app.post("/calculate_bmi", bodyParser, (request, response) => {
-  height = request.body.height * 0.0254
-  weight = request.body.weight / 2.2
-  bmi = weight/Math.pow(height, 2);
-  
-  response.type("application/json")
-  response.send(bmi)
-})
+  var output = {};
 
-app.post("/calculate_bp", bodyParser, (request, response) => {
-  bp = (request.body.systolic) + "/" + (request.body.diastolic)
-  response.type("application/json")
-  response.send(bp)
+  height = request.body.height * 0.0254;
+  weight = request.body.weight / 2.2;
+  bmi = weight / Math.pow(height, 2);
 
-  response.type("application/json")
-  response.send(risk);
+  if (bmi >= 18.5 && bmi < 25) {
+    output.points = 0;
+    output.bmi = "normal";
+  } else if (bmi < 30) {
+    output.points = 30;
+    output.bmi = "overweight";
+  } else {
+    output.bmi = "other";
+  }
+
+  response.type("application/json");
+  response.send(output);
 });
 
+app.post("/calculate_bp", bodyParser, (request, response) => {
+  bp = request.body.systolic + "/" + request.body.diastolic;
+  response.type("application/json");
+  response.send(bp);
+});
 
 app.post("/calculate_disease", bodyParser, (request, response) => {
   //Here is the disease calculator
   risk = {};
+<<<<<<< HEAD
   const diabetis = request.body.diabetis
   const cancer = request.body.cancer
   const alzhe = request.body.alzhe
@@ -78,6 +87,11 @@ app.post("/calculate_disease", bodyParser, (request, response) => {
 
   
   
+=======
+  const diabetis = request.body.diabetis;
+  const cancer = request.body.cancer;
+  const alzhe = request.body.alzhe;
+>>>>>>> 3a6f537d519a81aa89b435d35114269da56f9b8a
 
   response.type("application/json");
   response.send(risk);
