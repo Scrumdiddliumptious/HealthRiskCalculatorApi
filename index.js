@@ -39,13 +39,13 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
   response.send(risk);
 });
 
-<<<<<<< HEAD
 app.post("/get_age_as_points", bodyParser, (request, response) => {
   age = request.body.age;
-  totalScore = (age < 30)? 0 : (age < 45)? 10 : (age < 60)? 20 : 30;
+  totalScore = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
   response.type("application/json");
   response.send(totalScore);
-=======
+});
+
 app.post("/calculate_bmi", bodyParser, (request, response) => {
   var output = {};
 
@@ -82,7 +82,6 @@ app.post("/calculate_disease", bodyParser, (request, response) => {
 
   response.type("application/json");
   response.send(risk);
->>>>>>> a9f3a66d2f8e7c219db85a4a788e47105563ab67
 });
 
 // Custom 404 page.
