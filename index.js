@@ -39,7 +39,7 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
   response.send(risk);
 });
 
-app.post("/get_age_as_points", bodyParser, (request, response) => {
+app.post("/age_to_points", bodyParser, (request, response) => {
   var output = {};
   age = request.body.age;
   output.points = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
@@ -47,7 +47,7 @@ app.post("/get_age_as_points", bodyParser, (request, response) => {
   response.send(output);
 });
 
-app.post("/calculate_bmi", bodyParser, (request, response) => {
+app.post("/bmi_to_points", bodyParser, (request, response) => {
   var output = {};
 
   height = request.body.height * 0.0254;
@@ -68,7 +68,7 @@ app.post("/calculate_bmi", bodyParser, (request, response) => {
   response.send(output);
 });
 
-app.post("/calculate_bp", bodyParser, (request, response) => {
+app.post("/bp_to_points", bodyParser, (request, response) => {
   var output = {};
 
   systolic = request.body.systolic;
@@ -101,7 +101,7 @@ app.post("/calculate_bp", bodyParser, (request, response) => {
   response.send(output);
 });
 
-app.post("/calculate_disease", bodyParser, (request, response) => {
+app.post("/disease_to_points", bodyParser, (request, response) => {
   //Here is the disease calculator
   risk = {};
   const diabetis = request.body.diabetis;
