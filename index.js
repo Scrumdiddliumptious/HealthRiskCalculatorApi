@@ -40,10 +40,11 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
 });
 
 app.post("/get_age_as_points", bodyParser, (request, response) => {
+  var output = {};
   age = request.body.age;
-  totalScore = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
+  output.points = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
   response.type("application/json");
-  response.send(totalScore);
+  response.send(output);
 });
 
 app.post("/calculate_bmi", bodyParser, (request, response) => {
