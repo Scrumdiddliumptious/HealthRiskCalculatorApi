@@ -40,6 +40,13 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
   response.send(risk);
 });
 
+app.post("/get_age_as_points", bodyParser, (request, response) => {
+  age = request.body.age;
+  totalScore = (age < 30)? 0 : (age < 45)? 10 : (age < 60)? 20 : 30;
+  response.type("application/json");
+  response.send(totalScore);
+});
+
 // Custom 404 page.
 app.use((request, response) => {
   response.type("text/plain");
