@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser").json();
 const cors = require("cors");
-const open = require("open");
 app = express();
 
 const port = process.env.PORT || 3000;
@@ -40,11 +39,50 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
   response.send(risk);
 });
 
+<<<<<<< HEAD
 app.post("/get_age_as_points", bodyParser, (request, response) => {
   age = request.body.age;
   totalScore = (age < 30)? 0 : (age < 45)? 10 : (age < 60)? 20 : 30;
   response.type("application/json");
   response.send(totalScore);
+=======
+app.post("/calculate_bmi", bodyParser, (request, response) => {
+  var output = {};
+
+  height = request.body.height * 0.0254;
+  weight = request.body.weight / 2.2;
+  bmi = weight / Math.pow(height, 2);
+
+  if (bmi >= 18.5 && bmi < 25) {
+    output.points = 0;
+    output.bmi = "normal";
+  } else if (bmi < 30) {
+    output.points = 30;
+    output.bmi = "overweight";
+  } else {
+    output.bmi = "other";
+  }
+
+  response.type("application/json");
+  response.send(output);
+});
+
+app.post("/calculate_bp", bodyParser, (request, response) => {
+  bp = request.body.systolic + "/" + request.body.diastolic;
+  response.type("application/json");
+  response.send(bp);
+});
+
+app.post("/calculate_disease", bodyParser, (request, response) => {
+  //Here is the disease calculator
+  risk = {};
+  const diabetis = request.body.diabetis;
+  const cancer = request.body.cancer;
+  const alzhe = request.body.alzhe;
+
+  response.type("application/json");
+  response.send(risk);
+>>>>>>> a9f3a66d2f8e7c219db85a4a788e47105563ab67
 });
 
 // Custom 404 page.
