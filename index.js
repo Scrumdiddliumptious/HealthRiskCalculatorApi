@@ -43,6 +43,7 @@ app.post("/age_to_points", bodyParser, (request, response) => {
   var output = {};
   age = request.body.age;
   output.points = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
+  output.age = age;
   response.type("application/json");
   response.send(output);
 });
@@ -80,15 +81,15 @@ app.post("/bp_to_points", bodyParser, (request, response) => {
   } else if (systolic >= 140 || diastolic >= 90) {
     output.points = 75;
     output.bp = "stage 2";
-  } else if (systolic >= 130 || diastolic >= 80) {
-    output.points = 30;
-    output.bp = "stage 1";
   } else if (
     (systolic >= 120 && systolic < 130) ||
     (diastolic >= 80 && diastolic < 90)
   ) {
     output.points = 15;
     output.bp = "elevated";
+  } else if (systolic >= 130 || diastolic >= 80) {
+    output.points = 30;
+    output.bp = "stage 1";
   } else if (systolic < 120 && diastolic < 80) {
     output.points = 0;
     output.bp = "normal";
