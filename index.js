@@ -71,25 +71,30 @@ app.post("/calculate_bmi", bodyParser, (request, response) => {
 app.post("/calculate_bp", bodyParser, (request, response) => {
   var output = {};
 
-  bp = request.body.systolic + "/" + request.body.diastolic;
+  systolic = request.body.systolic;
+  diastolic = request.body.diastolic;
 
-  if (systolic < 120 && diastolic < 80) {
-    output.points = 0;
-    output.bp = "normal"
-  } else if (systolic >= 120 && systolic <= 129 && diastolic < 80) {
-    output.points = 15;
-    output.bp = "elevated"
-  } else if (systolic >= 130 && systolic <= 139 || diastolic >= 80 && diastolic <= 89) {
-    output.points = 30;
-    output.bp = "stage 1"
+  if (systolic > 180 || diastolic > 120) {
+    output.points = 100;
+    output.bp = "crisis";
   } else if (systolic >= 140 || diastolic >= 90) {
     output.points = 75;
-    output.bp = "stage 2"
-  } else if (systolic >= 180 && diastolic >= 120) {
-    output.points = 100;
-    output.bp = "crisis"
+    output.bp = "stage 2";
+  } else if (systolic >= 130 || diastolic >= 80) {
+    output.points = 30;
+    output.bp = "stage 1";
+  } else if (
+    (systolic >= 120 && systolic < 130) ||
+    (diastolic >= 80 && diastolic < 90)
+  ) {
+    output.points = 15;
+    output.bp = "elevated";
+  } else if (systolic < 120 && diastolic < 80) {
+    output.points = 0;
+    output.bp = "normal";
   } else {
-    output.bp = "other"
+    output.bp = "other";
+    output.points = 0;
   }
 
   response.type("application/json");
