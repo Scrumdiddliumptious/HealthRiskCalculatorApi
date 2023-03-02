@@ -79,10 +79,10 @@ app.post("/calculate_bp", bodyParser, (request, response) => {
   } else if (systolic >= 120 && systolic <= 129 && diastolic < 80) {
     output.points = 15;
     output.bp = "elevated"
-  } else if (systolic >= 130 && systolic <= 139 && diastolic >= 80 && diastolic <= 89) {
+  } else if (systolic >= 130 && systolic <= 139 || diastolic >= 80 && diastolic <= 89) {
     output.points = 30;
     output.bp = "stage 1"
-  } else if (systolic >= 140 && diastolic >= 90) {
+  } else if (systolic >= 140 || diastolic >= 90) {
     output.points = 75;
     output.bp = "stage 2"
   } else if (systolic >= 180 && diastolic >= 120) {
