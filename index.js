@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser").json();
 const cors = require("cors");
-const open = require("open");
 app = express();
 
 const port = process.env.PORT || 3000;
@@ -40,7 +39,16 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
   response.send(risk);
 });
 
-app.post("/calculate_bmi", bodyParser, (request, response) => {
+app.post("/age_to_points", bodyParser, (request, response) => {
+  var output = {};
+  age = request.body.age;
+  output.points = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
+  output.age = age;
+  response.type("application/json");
+  response.send(output);
+});
+
+app.post("/bmi_to_points", bodyParser, (request, response) => {
   var output = {};
 
   height = request.body.height * 0.0254;
@@ -61,30 +69,45 @@ app.post("/calculate_bmi", bodyParser, (request, response) => {
   response.send(output);
 });
 
-app.post("/calculate_bp", bodyParser, (request, response) => {
-  bp = request.body.systolic + "/" + request.body.diastolic;
-  response.type("application/json");
-  response.send(bp);
-});
+app.post("/bp_to_points", bodyParser, (request, response) => {
+  var output = {};
 
-app.post("/calculate_disease", bodyParser, (request, response) => {
-  //Here is the disease calculator
-  risk = {};
+  systolic = request.body.systolic;
+  diastolic = request.body.diastolic;
 
-  const diabetis = request.body.diabetis
-  const cancer = request.body.cancer
-  const alzhe = request.body.alzhe
-
-  if (alzhe && cancer && diabetis != True) {
+  if (systolic > 180 || diastolic > 120) {
+    output.points = 100;
+    output.bp = "crisis";
+  } else if (systolic >= 140 || diastolic >= 90) {
+    output.points = 75;
+    output.bp = "stage 2";
+  } else if (
+    (systolic >= 120 && systolic < 130) ||
+    (diastolic >= 80 && diastolic < 90)
+  ) {
+    output.points = 15;
+    output.bp = "elevated";
+  } else if (systolic >= 130 || diastolic >= 80) {
+    output.points = 30;
+    output.bp = "stage 1";
+  } else if (systolic < 120 && diastolic < 80) {
     output.points = 0;
-  } else if (alzhe == True ||  cancer == True || diabetis == True) {
-    output.points = 10;
-  } else if (alzhe == True && cancer == True || cancer == True || diabetis == True) {
-    risk.risk = "High Risk";
+    output.bp = "normal";
   } else {
-    risk.risk = "Uninsurable";
+    output.bp = "other";
+    output.points = 0;
   }
 
+  response.type("application/json");
+  response.send(output);
+});
+
+app.post("/disease_to_points", bodyParser, (request, response) => {
+  //Here is the disease calculator
+  risk = {};
+  const diabetis = request.body.diabetis;
+  const cancer = request.body.cancer;
+  const alzhe = request.body.alzhe;
 
   response.type("application/json");
   response.send(risk);
