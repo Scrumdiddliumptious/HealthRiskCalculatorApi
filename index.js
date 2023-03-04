@@ -70,28 +70,21 @@ app.post("/calculate_bp", bodyParser, (request, response) => {
 app.post("/calculate_disease", bodyParser, (request, response) => {
   //Here is the disease calculator
   risk = {};
-<<<<<<< HEAD
+
   const diabetis = request.body.diabetis
   const cancer = request.body.cancer
   const alzhe = request.body.alzhe
 
-  if (alzhe = yes) {
-    risk.risk = "Low Risk";
-  } else if (totalScore <= 50) {
-    risk.risk = "Moderate Risk";
-  } else if (totalScore <= 75) {
+  if (alzhe && cancer && diabetis != True) {
+    output.points = 0;
+  } else if (alzhe == True ||  cancer == True || diabetis == True) {
+    output.points = 10;
+  } else if (alzhe == True && cancer == True || cancer == True || diabetis == True) {
     risk.risk = "High Risk";
   } else {
     risk.risk = "Uninsurable";
   }
 
-  
-  
-=======
-  const diabetis = request.body.diabetis;
-  const cancer = request.body.cancer;
-  const alzhe = request.body.alzhe;
->>>>>>> 3a6f537d519a81aa89b435d35114269da56f9b8a
 
   response.type("application/json");
   response.send(risk);
