@@ -104,10 +104,18 @@ app.post("/bp_to_points", bodyParser, (request, response) => {
 
 app.post("/disease_to_points", bodyParser, (request, response) => {
   //Here is the disease calculator
-  risk = {};
-  const diabetis = request.body.diabetis;
-  const cancer = request.body.cancer;
-  const alzhe = request.body.alzhe;
+  output = {};
+  diabetis = request.body.diabetis;
+  cancer = request.body.cancer;
+  alzhe = request.body.alzhe;
+
+  if (cancer == False && diabetis == False && alzhe == False){
+    output.points = 0;
+  }else if (cancer == False || diabetis == False || alzhe == Fasle){
+    output.points = 20;
+  }else{
+    output.points = 10;
+  }
 
   response.type("application/json");
   response.send(risk);
