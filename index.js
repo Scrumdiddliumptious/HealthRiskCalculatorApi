@@ -22,7 +22,6 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
     request.body.bp +
     request.body.disease;
 
-  console.log(request.body);
   risk.score = totalScore;
 
   if (totalScore <= 20) {
@@ -43,7 +42,6 @@ app.post("/age_to_points", bodyParser, (request, response) => {
   var output = {};
   age = request.body.age;
   output.points = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
-  output.age = age;
   response.type("application/json");
   response.send(output);
 });
@@ -62,6 +60,7 @@ app.post("/bmi_to_points", bodyParser, (request, response) => {
     output.points = 30;
     output.bmi = "overweight";
   } else {
+    output.points = 75;
     output.bmi = "other";
   }
 
@@ -104,12 +103,12 @@ app.post("/bp_to_points", bodyParser, (request, response) => {
 
 app.post("/disease_to_points", bodyParser, (request, response) => {
   output = { points: 0 };
-  diabetis = request.body.diabetis;
+  diabetes = request.body.diabetes;
   cancer = request.body.cancer;
   alzhe = request.body.alzhe;
 
   if (cancer) output.points += 10;
-  if (diabetis) output.points += 10;
+  if (diabetes) output.points += 10;
   if (alzhe) output.points += 10;
 
   response.type("application/json");
