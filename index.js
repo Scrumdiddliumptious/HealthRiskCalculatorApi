@@ -26,12 +26,16 @@ app.post("/calculate_risk", bodyParser, (request, response) => {
 
   if (totalScore <= 20) {
     risk.risk = "Low Risk";
+    risk.color = "bg-success";
   } else if (totalScore <= 50) {
     risk.risk = "Moderate Risk";
+    risk.color = "bg-warning";
   } else if (totalScore <= 75) {
     risk.risk = "High Risk";
+    risk.color = "bg-danger";
   } else {
     risk.risk = "Uninsurable";
+    risk.color = "bg-warning-subtle";
   }
 
   response.type("application/json");
@@ -42,6 +46,12 @@ app.post("/age_to_points", bodyParser, (request, response) => {
   var output = {};
   age = request.body.age;
   output.points = age < 30 ? 0 : age < 45 ? 10 : age < 60 ? 20 : 30;
+
+  if (output.points === 0) output.color = "bg-success";
+  else if (output.points === 10) output.color = "bg-warning";
+  else if (output.points === 20) output.color = "bg-danger";
+  else output.color = "bg-warning-subtle";
+
   response.type("application/json");
   response.send(output);
 });
@@ -56,12 +66,15 @@ app.post("/bmi_to_points", bodyParser, (request, response) => {
   if (bmi >= 18.5 && bmi < 25) {
     output.points = 0;
     output.bmi = "normal";
+    output.color = "bg-success";
   } else if (bmi < 30) {
     output.points = 30;
     output.bmi = "overweight";
+    output.color = "bg-warning";
   } else {
     output.points = 75;
     output.bmi = "other";
+    output.color = "bg-danger";
   }
 
   response.type("application/json");
@@ -97,6 +110,11 @@ app.post("/bp_to_points", bodyParser, (request, response) => {
     output.points = 0;
   }
 
+  if (output.points === 0) output.color = "bg-success";
+  else if (output.points === 15) output.color = "bg-warning";
+  else if (output.points === 30) output.color = "bg-danger";
+  else output.color = "bg-warning-subtle";
+
   response.type("application/json");
   response.send(output);
 });
@@ -110,6 +128,11 @@ app.post("/disease_to_points", bodyParser, (request, response) => {
   if (cancer) output.points += 10;
   if (diabetes) output.points += 10;
   if (alzhe) output.points += 10;
+
+  if (output.points === 0) output.color = "bg-success";
+  else if (output.points === 10) output.color = "bg-warning";
+  else if (output.points === 20) output.color = "bg-danger";
+  else output.color = "bg-warning-subtle";
 
   response.type("application/json");
   response.send(output);
